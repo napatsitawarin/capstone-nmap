@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 
-class Zap_input(BaseModel):
+class Nmap_input(BaseModel):
     url: str
     class Config:
         orm_mode = True

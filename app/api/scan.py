@@ -1,17 +1,16 @@
 from fastapi import APIRouter, Body, Response
-from app.schemas import Zap_input
+from app.schemas import Nmap_input
 from starlette.responses import JSONResponse
 import logging, os
 
 router = APIRouter()
 
 @router.post("/scan", status_code=200)
-def test(req_body: Zap_input = Body(...)) -> Response:
+def test(req_body: Nmap_input = Body(...)) -> Response:
     try:
         if req_body:
             url = req_body.url
-            os.system(f"docker run -v $(pwd):/zap/wrk/:rw -t owasp/zap2docker-stable zap-baseline.py \
-    -t {url} -g gen.conf -J testreport.json")
+            os.system(f"docker run --rm -it instrumentisto/nmap -A -T4 scanme.nmap.org")
             return JSONResponse(
                 status_code = 200,
                 content = {
