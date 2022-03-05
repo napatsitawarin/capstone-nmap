@@ -10,7 +10,9 @@ def test(req_body: Nmap_input = Body(...)) -> Response:
     try:
         if req_body:
             url = req_body.url
-            os.system(f"docker run --rm -it instrumentisto/nmap -A -T4 scanme.nmap.org")
+            os.system(f"nmap -sV -oX ./reports/nmap_output.xml {url} 1>/dev/null 2>/dev/null")
+            # nmap -T4 -A -v
+            # nmap -sV -oX
             return JSONResponse(
                 status_code = 200,
                 content = {
