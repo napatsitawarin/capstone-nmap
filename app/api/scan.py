@@ -10,7 +10,7 @@ def test(req_body: Nmap_input = Body(...)) -> Response:
     try:
         if req_body:
             url = req_body.url
-            os.system(f"nmap -sV -oX ./reports/nmap_output.xml {url} 1>/dev/null 2>/dev/null")
+            os.system(f"nmap -T4 -A -v -oX ./reports/nmap_output.xml {url} 1>/dev/null 2>/dev/null")
             # nmap -T4 -A -v
             # nmap -sV -oX
             return JSONResponse(
