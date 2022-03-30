@@ -11,7 +11,14 @@ router = APIRouter()
 def test(req_body: Nmap_input = Body(...)) -> Response:
     output_filename = "nmap_output.xml"
     output_path = f"./reports/{output_filename}"
+    
     try:
+        '''
+        Remove the old result file
+        '''
+        if os.path.exists(output_path):
+            os.remove(output_path)
+
         if req_body:
             url = req_body.url
             status = os.system(
