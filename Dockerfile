@@ -13,7 +13,3 @@ RUN pip3 install -r requirement.txt
 EXPOSE 8000
 
 CMD ["python3", "main.py"]
-
-# docker build . -t capstone-nmap
-
-# docker run -v $(pwd)/reports:/app/reports -p 8000:8000 ffuf-service
